@@ -144,44 +144,100 @@ function getBook(id) {
 }
 
 //destructuring
-const book = getBook(3);
-book;
+// const book = getBook(3);
+// book;
 
-const { title, author, pages, publicationDate, genres, hasMovieAdaptation } =
-  book;
+// const { title, author, pages, publicationDate, genres, hasMovieAdaptation } =
+//   book;
 
-console.log(title, author, pages);
+// console.log(title, author, pages);
 
-const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
-console.log(primaryGenre, secondaryGenre, otherGenres);
+// const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
+// console.log(primaryGenre, secondaryGenre, otherGenres);
 
-const newGenre = ["epic fantasy", ...genres];
-console.log(newGenre);
+// const newGenre = ["epic fantasy", ...genres];
+// console.log(newGenre);
 
-const updatedBook = {
-  ...book,
-  //Adding a new property
-  moviePublicationDate: "2001-12-19",
+// const updatedBook = {
+//   ...book,
+//   //Adding a new property
+//   moviePublicationDate: "2001-12-19",
 
-  //overwriting an existing property
-  pages: 1210,
-};
-updatedBook;
+//   //overwriting an existing property
+//   pages: 1210,
+// };
+// updatedBook;
 
-console.log(true && "Some String");
-console.log(false && "Some string");
-console.log(hasMovieAdaptation && "This book has a movie");
+// console.log(true && "Some String");
+// console.log(false && "Some string");
+// console.log(hasMovieAdaptation && "This book has a movie");
 
-console.log(false || "Some string");
-console.log(true || "Some string");
+// console.log(false || "Some string");
+// console.log(true || "Some string");
 
-const count = book.reviews.librarything?.reviewsCount ?? "no data";
-count;
+// const count = book.reviews.librarything?.reviewsCount ?? "no data";
+// count;
 
+// function getTotalReviewCount(book) {
+//   const goodread = book.reviews.goodreads.reviewsCount;
+//   const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+//   return goodread + librarything;
+// }
+
+// console.log(getTotalReviewCount(book));
 function getTotalReviewCount(book) {
-  const goodread = book.reviews.goodreads.reviewsCount;
-  const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+  const goodread = book.reviews?.goodreads?.reviewsCount;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
   return goodread + librarything;
 }
 
-console.log(getTotalReviewCount(book));
+const books = getBooks();
+
+const titles = books.map((book) => book.title);
+titles;
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewsCount: getTotalReviewCount(book),
+}));
+essentialData;
+
+const longBookWithMovie = books
+  .filter((book) => book.pages >= 500)
+  .filter((book) => book.hasMovieAdaptation);
+longBookWithMovie;
+
+const adventureBooks = books
+  .filter((book) => book.genres.includes("adventure"))
+  .map((book) => book.title);
+
+adventureBooks;
+
+const pagesAllBook = books.reduce((acc, book) => acc + book.pages, 0);
+pagesAllBook;
+
+const arr = [3, 7, 2, 5, 7, 9, 3];
+const sorted = arr.slice().sort((a, b) => b - a);
+sorted;
+
+const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
+sortedByPages;
+
+//1) Add book object to array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+  author: "J. K. Rowling",
+};
+
+const booksAfterAdd = [...books, newBook];
+booksAfterAdd;
+
+//2) Delete book object from array
+const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
+booksAfterDelete;
+
+const bookAfterUpdate = books.map((book) =>
+  book.id === 1 ? { ...book, pages: 777 } : book
+);
+bookAfterUpdate;
