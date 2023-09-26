@@ -144,7 +144,7 @@ function getBook(id) {
 }
 
 //destructuring
-const book = getBook(2);
+const book = getBook(3);
 book;
 
 const { title, author, pages, publicationDate, genres, hasMovieAdaptation } =
@@ -175,5 +175,13 @@ console.log(hasMovieAdaptation && "This book has a movie");
 console.log(false || "Some string");
 console.log(true || "Some string");
 
-const count = book.reviews.librarything.reviewsCount ?? "no data";
+const count = book.reviews.librarything?.reviewsCount ?? "no data";
 count;
+
+function getTotalReviewCount(book) {
+  const goodread = book.reviews.goodreads.reviewsCount;
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+  return goodread + librarything;
+}
+
+console.log(getTotalReviewCount(book));
