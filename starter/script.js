@@ -185,59 +185,75 @@ function getBook(id) {
 // }
 
 // console.log(getTotalReviewCount(book));
-function getTotalReviewCount(book) {
-  const goodread = book.reviews?.goodreads?.reviewsCount;
-  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
-  return goodread + librarything;
+// function getTotalReviewCount(book) {
+//   const goodread = book.reviews?.goodreads?.reviewsCount;
+//   const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+//   return goodread + librarything;
+// }
+
+// const books = getBooks();
+
+// const titles = books.map((book) => book.title);
+// titles;
+// const essentialData = books.map((book) => ({
+//   title: book.title,
+//   author: book.author,
+//   reviewsCount: getTotalReviewCount(book),
+// }));
+// essentialData;
+
+// const longBookWithMovie = books
+//   .filter((book) => book.pages >= 500)
+//   .filter((book) => book.hasMovieAdaptation);
+// longBookWithMovie;
+
+// const adventureBooks = books
+//   .filter((book) => book.genres.includes("adventure"))
+//   .map((book) => book.title);
+
+// adventureBooks;
+
+// const pagesAllBook = books.reduce((acc, book) => acc + book.pages, 0);
+// pagesAllBook;
+
+// const arr = [3, 7, 2, 5, 7, 9, 3];
+// const sorted = arr.slice().sort((a, b) => b - a);
+// sorted;
+
+// const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
+// sortedByPages;
+
+// //1) Add book object to array
+// const newBook = {
+//   id: 6,
+//   title: "Harry Potter and the Chamber of Secrets",
+//   author: "J. K. Rowling",
+// };
+
+// const booksAfterAdd = [...books, newBook];
+// booksAfterAdd;
+
+// //2) Delete book object from array
+// const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
+// booksAfterDelete;
+
+// const bookAfterUpdate = books.map((book) =>
+//   book.id === 1 ? { ...book, pages: 777 } : book
+// );
+// bookAfterUpdate;
+
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
+
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+  return data;
 }
 
-const books = getBooks();
+const todos = getTodos();
 
-const titles = books.map((book) => book.title);
-titles;
-const essentialData = books.map((book) => ({
-  title: book.title,
-  author: book.author,
-  reviewsCount: getTotalReviewCount(book),
-}));
-essentialData;
-
-const longBookWithMovie = books
-  .filter((book) => book.pages >= 500)
-  .filter((book) => book.hasMovieAdaptation);
-longBookWithMovie;
-
-const adventureBooks = books
-  .filter((book) => book.genres.includes("adventure"))
-  .map((book) => book.title);
-
-adventureBooks;
-
-const pagesAllBook = books.reduce((acc, book) => acc + book.pages, 0);
-pagesAllBook;
-
-const arr = [3, 7, 2, 5, 7, 9, 3];
-const sorted = arr.slice().sort((a, b) => b - a);
-sorted;
-
-const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
-sortedByPages;
-
-//1) Add book object to array
-const newBook = {
-  id: 6,
-  title: "Harry Potter and the Chamber of Secrets",
-  author: "J. K. Rowling",
-};
-
-const booksAfterAdd = [...books, newBook];
-booksAfterAdd;
-
-//2) Delete book object from array
-const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
-booksAfterDelete;
-
-const bookAfterUpdate = books.map((book) =>
-  book.id === 1 ? { ...book, pages: 777 } : book
-);
-bookAfterUpdate;
+console.log(todos);
+console.log("jonas");
